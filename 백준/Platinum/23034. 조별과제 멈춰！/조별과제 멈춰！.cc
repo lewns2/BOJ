@@ -27,13 +27,15 @@ bool merge(int a, int b) {
     return true;
 }
 
-void dfs(int start, int v, int p = -1) {
+void dfs(int start, int v, int mx, int p = -1) {
+    
+    dist[start][v] = mx;
+    
     for(auto nxt : adj[v]) {
         int next = nxt.first;
         int nextcost = nxt.second;
         if(next != p) {
-            dist[start][next] = max({dist[start][next], dist[start][v], nextcost});
-            dfs(start, next, v);
+            dfs(start, next, max(mx, nextcost), v);
         }
     }
 }
@@ -65,7 +67,7 @@ int main() {
     }
     
     for(int i=1; i<=n; i++) {
-        dfs(i, i);
+        dfs(i, i, 0);
     }
 
     int q; cin >> q;
