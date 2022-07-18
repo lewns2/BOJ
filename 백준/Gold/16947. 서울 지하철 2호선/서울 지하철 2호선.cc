@@ -8,7 +8,7 @@ using namespace std;
 const int mxN = 3e3+10;
 int n;
 vector<int> arr[mxN];
-int vis[mxN], degree[mxN], par[mxN] ,ans[mxN];
+int vis[mxN], par[mxN], ans[mxN];
 vector<int> cycle;
 int cnt = 0;
 
@@ -69,17 +69,8 @@ int main() {
         int fr, to; cin >> fr >> to;
         arr[fr].push_back(to);
         arr[to].push_back(fr);
-        degree[fr]++;
-        degree[to]++;
     }
-    
-    // 끝 정점들
-    vector<int> ev;
-    for(int i=1; i<=n; i++) {
-        if(degree[i] == 1) {
-            ev.push_back(i);
-        }
-    }
+
     memset(vis, -1, sizeof(vis)); 
     for(int i=1; i<=n; i++) {
         if(vis[i] < 0) {
@@ -100,7 +91,4 @@ int main() {
     for(int i=1; i<=n; i++) {
         cout << ans[i] << " ";
     }
-    
-
-    
 } 
