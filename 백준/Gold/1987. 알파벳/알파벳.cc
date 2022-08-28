@@ -25,7 +25,6 @@ int main() {
 
     queue<pair<int, pair<int, int>>> q;
     q.push({init, {0, 0}});
-    vis[0][0] = 1; 
 
     int ans = 0;
     while(q.size()) {
@@ -44,12 +43,8 @@ int main() {
             int nx = x+dx[k];
             int ny = y+dy[k];
             if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-
-            if(!vis[nx][ny] && !(cur & (1<<ar[nx][ny]))) {
-                vis[nx][ny] = 1;
-                q.push({cur|(1<<ar[nx][ny]), {nx, ny}});
-                vis[nx][ny] = 0;
-            }
+            if(cur & (1<<ar[nx][ny])) continue;            
+            q.push({cur|(1<<ar[nx][ny]), {nx, ny}});
         }
     }
     cout << ans;
