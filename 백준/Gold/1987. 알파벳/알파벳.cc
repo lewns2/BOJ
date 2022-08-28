@@ -8,6 +8,21 @@ using namespace std;
 const int mxN = 21, dx[4]={1, -1, 0, 0}, dy[4]={0, 0, 1, -1};
 int n, m;
 int ar[mxN][mxN], vis[mxN][mxN];
+int ans = 0;
+
+void dfs(int x, int y, int cur, int dist) {
+    
+    ans = max(ans, dist);
+
+    for(int k=0; k<4; k++) {
+        int nx = x+dx[k];
+        int ny = y+dy[k];
+        if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+        if(cur & (1<<ar[nx][ny])) continue;
+
+        dfs(nx, ny, cur|(1<<ar[nx][ny]), dist+1);
+    }
+}
 
 int main() {
     ios_base ::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
@@ -23,29 +38,6 @@ int main() {
     int num = ar[0][0];
     init = init|(1<<num);
 
-    queue<pair<int, pair<int, int>>> q;
-    q.push({init, {0, 0}});
-
-    int ans = 0;
-    while(q.size()) {
-        int cur = q.front().first;
-        int x = q.front().second.first;
-        int y = q.front().second.second;
-        q.pop();
-
-        int tmp = 0;
-        for(int i=0; i<26; i++) {
-            if(cur & (1<<i)) tmp++;
-        }
-        ans = max(ans, tmp);
-
-        for(int k=0; k<4; k++) {
-            int nx = x+dx[k];
-            int ny = y+dy[k];
-            if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-            if(cur & (1<<ar[nx][ny])) continue;            
-            q.push({cur|(1<<ar[nx][ny]), {nx, ny}});
-        }
-    }
+    dfs(0, 0, init, 1);
     cout << ans;
 }
