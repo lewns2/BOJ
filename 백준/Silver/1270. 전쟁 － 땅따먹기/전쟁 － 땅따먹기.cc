@@ -15,7 +15,7 @@ int main() {
         ll cur = -1, num = -1;
         for(int i=0; i<n; i++) {
             ll a; cin >> a;
-            ++mp[a];
+            mp[a]++;
             if(mp[a] > cur) {
                 cur = mp[a];
                 num = a;
