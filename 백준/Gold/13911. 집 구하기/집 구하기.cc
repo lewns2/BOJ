@@ -53,13 +53,11 @@ int main() {
     for(int i=0; i<m; i++) {
         int node; cin >> node;
         ar[n+1].push_back({node, 0});
-        // ar[node].push_back({n+1, 0});
     }
     cin >> s >> y;
     for(int i=0; i<s; i++) {
         int node; cin >> node;
         ar[n+2].push_back({node, 0});
-        // ar[node].push_back({n+2, 0});
     }
     bfs(n+1, 0);
     bfs(n+2, 1);
