@@ -53,6 +53,7 @@ int main() {
     }
     int s, e; cin >> s >> e;
     memset(dp, -1, sizeof(dp));
+    dp[e] = 0;
     int ret = solve(s, e);
     if(ret == INF) {
         cout << -1;
